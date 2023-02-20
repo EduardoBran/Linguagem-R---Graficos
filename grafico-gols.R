@@ -34,3 +34,38 @@ ggplot(df, aes(x = Jogador, y = Gols, fill = Jogador)) +
   theme_classic()
 
 
+# Criando um data frame com os dados de gols do Messi entre os anos de 2010 e 2020
+
+# Criando um data frame com os dados de gols do Messi
+
+library(tidyverse)
+
+messi_gols <- tibble(
+  Ano = c(2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020),
+  Gols = c(60, 59, 91, 45, 58, 52, 59, 54, 51, 45, 31)
+)
+
+View(messi_gols)
+
+
+# Criando o gráfico de pizza com os dados de gols do Messi
+
+messi_gols %>%
+  ggplot(aes(x = "", y = Gols, fill = factor(Ano))) +
+  geom_bar(width = 1, stat = "identity") +
+  geom_text(aes(label = Gols), position = position_stack(vjust = 0.5), color = "black", size = 4.5) +
+  coord_polar(theta = "y") +
+  scale_fill_brewer(palette = "Set3") +
+  theme_void() +
+  labs(title = "Gols de Lionel Messi entre 2010 e 2020", fill = "Ano")
+
+
+# Criando o gráfico de barras com os dados de gols do Messi
+
+messi_gols %>%
+  ggplot(aes(x = Ano, y = Gols)) +
+  geom_col(fill = "blue") +
+  geom_text(aes(label = Gols), vjust = -1) +
+  scale_x_continuous(breaks = seq(2010, 2020, 1)) + # exibir os anos como inteiros, sem a parte decimal, você pode utilizar a função scale_x_continuous() e especificar o argumento breaks com os valores desejados para o eixo x
+  labs(title = "Gols de Lionel Messi entre 2010 e 2020", x = "Ano", y = "Gols")
+
