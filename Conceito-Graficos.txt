@@ -1,58 +1,59 @@
-**********    O que são Gráficos ?    **********
+**********    O que sao Graficos ?    **********
 
-O gráfico é uma representação com forma geométrica (o que significa que ele precisa ser desenhado em uma tela do computador) construída de maneira exata e precisa a partir de informações numéricas (para que o grafico transmita a informação precisa construi-lo de maneira precisa através dos dados) obtidas através de pesquisas e organizadas em uma tabela (pesquisa neste caso é buscar os dados na fonte ou através de pesquisa).
-
-
-
-**********    Como a Linguagem R trata as visualizações de Dados ?    **********
-
-Existe um consenso na comunidade de Data Science, que a linguagem R fornece algumas das melhores ferramentas para geração de gráficos
-
-Os gráficos podem ser replicados, modificados e publicados com apenas poucas linhas de código.
-
-O pacote ggplot2 é considerado um dos melhores pacotes para visualização de dados do mercado. (existe a versao para linguagem R e também para Python).
-
-Os plots (gráficos bem simples) são objetos construídos através de funções com atributos (tamanho, cor).
-
-Podemos criar gráficos bem mais completos e profissionais usando pacotes como ggplot2, lattice.
+O grafico é uma representacao com forma geometrica (o que significa que ele precisa ser desenhado em uma tela do computador) construida de maneira exata e precisa a partir de informacoes numericas (para que o grafico transmita a informacao precisa construi-lo de maneira precisa atraves dos dados) obtidas atraves de pesquisas e organizadas em uma tabela (pesquisa neste caso é buscar os dados na fonte ou atraves de pesquisa).
 
 
 
-**********    Tipos de Gráficos    **********
+**********    Como a Linguagem R trata as visualizacoes de Dados ?    **********
+
+Existe um consenso na comunidade de Data Science, que a linguagem R fornece algumas das melhores ferramentas para geracao de graficos
+
+Os graficos podem ser replicados, modificados e publicados com apenas poucas linhas de codigo.
+
+O pacote ggplot2 é considerado um dos melhores pacotes para visualizacao de dados do mercado. (existe a versao para linguagem R e tambem para Python).
+
+Os plots (graficos bem simples) sao objetos construidos através de funcões com atributos (tamanho, cor).
+
+Podemos criar graficos bem mais completos e profissionais usando pacotes como ggplot2, lattice.
+
+
+
+**********    Tipos de Graficos    **********
 
 
                   - Colunas
                   - Barras 
                   - Linha
-                  - Dispersão
-Gráficos em R     - Área
+                  - Dispersao
+Graficos em R     - area
                   - Bolhas
-                  - Superfície
+                  - Superficie
                   - Cone
                   - Pizza
 
 
-Devemos nos preocupar com tipos/cores de pontos/linhas pois isso impacta como vão ver nosso gráfico.
+Devemos nos preocupar com tipos/cores de pontos/linhas pois isso impacta como vao ver nosso grafico.
 
 
 
-**********    Gramática dos Gráficos    **********
+**********    Gramatica dos Graficos    **********
 
-Descrição para cada um dos 7 elementos da Gramática dos Gráficos
+Descricao para cada um dos 7 elementos da Gramatica dos Graficos
 
 
-Elemento         -         Descrição
+Elemento         -         Descricao
+
 
 Dados            -         Conjunto de dados a ser analisado
 
-Estética         -	   Escala em que mapeamos os dados (escala influencia interpretação dos                                dados)
+Estetica         -	   Escala em que mapeamos os dados (escala influencia interpretacao dos                                dados)
 
-Geometria        -         Elementos visuais usados para representar os dados (tipo de linha em 			           grafico de linha, tipo de ponto em grafico de dispersão)
+Geometria        -         Elementos visuais usados para representar os dados (tipo de linha em 			           grafico de linha, tipo de ponto em grafico de dispersao)
 
-Facets           -         Visualização do gráfico em porções menores 
+Facets           -         Visualizacao do grafico em porcoes menores 
 
-Estatística      -         Representação e análise dos dados (leitura dos dados)
+Estatistica      -         Representacao e analise dos dados (leitura dos dados)
 
-Coordenadas      -         Área na qual o gráfico será construído
+Coordenadas      -         area na qual o grafico sera construido
 
-Temas            -         Visual geral do gráfico
+Temas            -         Visual geral do grafico
