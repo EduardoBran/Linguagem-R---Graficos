@@ -69,3 +69,32 @@ messi_gols %>%
   scale_x_continuous(breaks = seq(2010, 2020, 1)) + # exibir os anos como inteiros, sem a parte decimal, você pode utilizar a função scale_x_continuous() e especificar o argumento breaks com os valores desejados para o eixo x
   labs(title = "Gols de Lionel Messi entre 2010 e 2020", x = "Ano", y = "Gols")
 
+
+
+# Gráfico de barras com a quantidade de jogos, gols e assistências do ano de 2015
+
+# criando o dataframe com os dados dos jogadores
+
+jogadores <- data.frame(
+  nome = c("Lionel Messi", "C. Ronaldo", "R. Lewandowski", "Neymar", "Z. Ibrahimovic", "L. Suarez", "E. Cavani"),
+  jogos = c(38, 36, 31, 34, 31, 43, 31),
+  gols = c(41, 48, 30, 24, 19, 40, 19),
+  assistencias = c(19, 16, 3, 15, 9, 16, 6)
+)
+
+View(jogadores)
+
+# carregando o pacote ggplot2
+library(ggplot2)
+
+# criando o gráfico de barras
+
+ggplot(jogadores, aes(x = nome)) +
+  geom_bar(aes(y = jogos, fill = "Jogos"), alpha = 0.5, stat="identity", position="dodge") +
+  geom_bar(aes(y = gols, fill = "Gols"), alpha = 0.5, stat="identity", position="dodge") +
+  geom_bar(aes(y = assistencias, fill = "Assistências"), alpha = 0.5, stat="identity", position="dodge") +
+  scale_fill_manual(values = c("Jogos" = "blue", "Gols" = "red", "Assistências" = "green")) +
+  labs(title = "Desempenho dos jogadores em 2015", x = "Jogador", y = "Quantidade") +
+  scale_y_continuous(limits = c(0, 50), expand = c(0, 0.1), breaks = seq(0, 50, by = 10)) +
+  theme_bw()
+
