@@ -98,3 +98,54 @@ ggplot(jogadores, aes(x = nome)) +
   scale_y_continuous(limits = c(0, 50), expand = c(0, 0.1), breaks = seq(0, 50, by = 10)) +
   theme_bw()
 
+
+
+# Grafico em barras com o numero de jogos e gols dos maiores artilheiros da Europa em 2018
+
+
+# Criando o conjunto de dados com os artilheiros, número de jogos e gols
+
+artilheiros <- data.frame(
+  Nome = c("Lionel Messi", "Kylian Mbappé", "Fabio Quagliarella", "Cristiano Ronaldo", "Robert Lewandowski"),
+  Jogos = c(34, 27, 36, 31, 30),
+  Gols = c(36, 33, 26, 21, 22)
+)
+
+View(artilheiros)
+
+
+# Ordenando o conjunto de dados pelo número de gols
+
+artilheiros_ord <- artilheiros[order(artilheiros$Gols, decreasing = TRUE),]
+
+View(artilheiros_ord)
+
+
+# Criando o gráfico em barras exibindo somente a quantidade de gols
+
+barplot(artilheiros_ord$Gols,
+        names.arg = artilheiros_ord$Nome,
+        xlab = "Artilheiros",
+        ylab = "Gols",
+        col = "blue")
+
+
+# Grafico 2
+
+# Instalar e carregar biblioteca ggplot2
+
+install.packages("ggplot2")
+library(ggplot2)
+
+
+# ordena a tabela em ordem decrescente de gols
+
+artilheiros_ord <- artilheiros %>% arrange(desc(Gols))
+
+# Criar gráfico de barras dos artilheiros
+
+ggplot(artilheiros_ord, aes(x = Nome, y = Gols)) +
+  geom_bar(stat = "identity", fill = "blue") +
+  xlab("Artilheiros") +
+  ylab("Número de Gols") +
+  ggtitle("Maiores Artilheiros da Europa em 2018")
