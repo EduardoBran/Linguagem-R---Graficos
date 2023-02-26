@@ -140,6 +140,8 @@ library(ggplot2)
 
 # ordena a tabela em ordem decrescente de gols
 
+library(tidyverse)
+
 artilheiros_ord <- artilheiros %>% arrange(desc(Gols))
 
 # Criar gráfico de barras dos artilheiros
@@ -149,3 +151,58 @@ ggplot(artilheiros_ord, aes(x = Nome, y = Gols)) +
   xlab("Artilheiros") +
   ylab("Número de Gols") +
   ggtitle("Maiores Artilheiros da Europa em 2018")
+
+
+# 4 graficos de pizza em um unico grafico exibindo a quantidade de jogos e gols 
+# do jogador Lionel Messi entre os anos de 2014, 2015, 2016 e 2017. Coloque legenda com o numero do ano
+
+# Dados para o gráfico de pizza
+
+anos <- c("2014", "2015", "2016", "2017")
+jogos <- c(46, 49, 51, 54)
+gols <- c(58, 52, 59, 54)
+
+# Defina a disposição do gráfico para ter 2 linhas e 2 colunas
+
+par(mfrow=c(2,2))
+
+# Crie um loop for para criar um gráfico de pizza para cada ano
+
+for(i in 1:length(anos)){
+  labels <- c("Jogos", "Gols")
+  slices <- c(jogos[i], gols[i])
+  pie(slices, labels = labels, main = paste("Messi -", anos[i]), col = c("dodgerblue", "salmon"), border = NA)
+  legend("topright", legend = c("Jogos", "Gols"), fill = c("dodgerblue", "salmon"), title = anos[i])
+}
+
+
+# salvando os 4 graficos em uma unica imagem png
+
+png(filename = "graficoMessi.png", width = 800, height = 800)
+
+par(mfrow=c(2,2)) # necessario apos o png()
+
+
+# O código abauxi inclui o comando labels <- c(paste("Jogos\n", jogos[i]), paste("Gols\n", gols[i])) 
+# que adiciona o número de jogos e gols em cada fatia do gráfico de pizza.
+# O caractere \n é utilizado para criar uma nova linha para separar o número de jogos/gols da palavra correspondente.
+# cex - tamanho do texto no circulo do grafico de pizza
+# radius - aumenta o circulo do grafico de pizza
+# labels <- c(paste("Jogos\n", jogos[i]), paste("Gols\n", gols[i]))
+
+for(i in 1:length(anos)){
+  labels <- c(paste("\n", jogos[i]), paste("\n", gols[i]))
+  slices <- c(jogos[i], gols[i])
+  pie(slices,
+      labels = labels,
+      main = paste("Messi -", anos[i], "\n"),
+      col = c("dodgerblue", "salmon"),
+      border = NA, cex = 1.4, radius = 1.1)
+  legend("topright", legend = c("Jogos", "Gols"),
+         fill = c("dodgerblue", "salmon"), title = anos[i])
+}
+
+
+# fecha o dispositivo de graficos
+
+dev.off()
