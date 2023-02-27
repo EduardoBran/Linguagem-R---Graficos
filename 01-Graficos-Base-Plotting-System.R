@@ -251,3 +251,34 @@ plot(expectativa ~ pibpercap, data = df_1982, log = 'x', col = mycol[continente]
 legend('bottomright', legend = names(mycol), fill = mycol, title = 'Continente')
 
 
+
+
+# Funcao para ajustar escala precisa do seu grafico
+
+mycex <- function(var, r, f= sqrt){
+  x = f(var)
+  x_scaled = (x - min(x))/(max(x) - min(x))
+  r[1] + x_scaled * (r[2] - r[1])
+}
+
+# Plot
+
+plot(expectativa ~ pibpercap, data = df_1982, log = 'x',
+     col = mycol[continente],
+     cex = mycex(pop, r = c(0.2, 10))
+)
+legend('bottomright', legend = names(mycol), fill = mycol, title = 'Continente')
+
+
+# O argumento cex é definido como a chamada da função mycex(). Esta função é usada para escalar
+# o tamanho dos pontos de acordo com a variável pop (que vem do df pibpercap.csv), que é a população
+# correspondente de cada observação no df_1982. A função mycex() foi definida anteriormente e é usada
+# para dimensionar os pontos em uma escala de 0,2 a 10, dependendo do tamanho da população.
+
+
+
+# salvando o grafico  em png
+
+png('GraficoPibPerCapComEscalaPersonalizada.png', width = 1500, height = 1000, res = 100)
+
+dev.off() # fecha o dispositivo de graficos
