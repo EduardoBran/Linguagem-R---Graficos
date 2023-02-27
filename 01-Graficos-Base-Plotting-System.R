@@ -220,12 +220,34 @@ plot(cars$speed, type='s',
      xlab='Cars ID', ylab='')
 text(8, 14, 'Velocidade', cex=0.85, col='red')
 
-par(new=T)                                      # A função par(new = TRUE) é usada em conjunto com a função plot() para sobrepor um gráfico existente com um novo gráfico. Quando par(new = TRUE) é definido, o novo gráfico é sobreposto no gráfico anterior em vez de substituí-lo. 
+par(new=T)                                                         # A função par(new = TRUE) é usada em conjunto com a função plot() para sobrepor um gráfico existente com um novo gráfico. Quando par(new = TRUE) é definido, o novo gráfico é sobreposto no gráfico anterior em vez de substituí-lo. 
 
 plot(cars$dist, type = 's',
      col='darkblue', bty='n',
      ann=F, axes=F)
-axis(side=4)                                    # Resumindo, ann=F e axes=F são usados para personalizar o gráfico removendo as anotações padrão e os eixos e adicionando eixos personalizados usando a função axis().
+axis(side=4)                                                       # Resumindo, ann=F e axes=F são usados para personalizar o gráfico removendo as anotações padrão e os eixos e adicionando eixos personalizados usando a função axis().
 text(37, 18, 'Distancia', cex=0.85, col='darkblue')
 
 title(main='Velocidade x Distancia')
+
+
+
+# Plots a partir de datasets
+
+df <- read.csv('pibpercap.csv', stringsAsFactors = F)              # Em resumo, o parâmetro stringsAsFactors controla se as colunas de texto em um arquivo de dados devem ser lidas como fatores ou caracteres simples em R.
+View(df)
+
+df_1982 <- subset(df, ano == 1982)                                 # A função subset() é usada para extrair uma parte dos dados de um dataframe com base em uma ou mais condições especificadas.
+View(df_1982)
+
+plot(expectativa ~ pibpercap, data = df_1982, log = 'x')           #gráfico de dispersão usando a função plot() com a variável expectativa no eixo y e a variável pibpercap no eixo x. A opção data = df_1982 informa que os dados usados para o gráfico são do dataframe df_1982. Além disso, a opção log = 'x' é usada para transformar o eixo x em uma escala logarítmica. Isso significa que a distância entre os valores no eixo x não será uniforme, mas aumentará exponencialmente à medida que nos afastamos da origem.
+
+# Nomeando as colunas
+
+mycol <- c(Asia = 'tomato', Europe = 'chocolate4', Africa = 'dodgerblue2',
+           Amercias = 'darkgoldenrod1', Oceania = 'green4')
+
+plot(expectativa ~ pibpercap, data = df_1982, log = 'x', col = mycol[continente])
+legend('bottomright', legend = names(mycol), fill = mycol, title = 'Continente')
+
+
