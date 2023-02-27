@@ -175,3 +175,57 @@ dev.off()
 
 
 # Estendendo as funcoes do plot
+
+install.packages('plotrix') # permite acessorios personalizados para plotagem
+library(plotrix)
+
+?plotrix
+
+# definindo area de plotagem para 1 grafico por imagem e cor vermelho
+
+par(mfrow = c(1,1), col.axis = 'red')
+
+plot(1:6, las = 3, xlab = 'lty 1:6', ylab = '', main = 'Mais opcoes ao plot')
+ablineclip(v=1, lty=1, col='sienna2', lwd=8) # adiciona uma linha vertical na posição x = 1 com estilo de linha sólida (lty = 1), cor sienna2 e espessura de linha 2.
+ablineclip(v=2, lty=1, col='green3', lwd=2)
+ablineclip(v=3, lty=1, col='sienna2', lwd=2)
+ablineclip(v=4, lty=1, col='sienna2', lwd=2)
+ablineclip(v=5, lty=1, col='sienna2', lwd=2)
+ablineclip(v=6, lty=1, col='sienna2', lwd=2)
+ablineclip(v=7, lty=1, col='sienna2', lwd=2)
+
+
+plot(lynx)
+plot(lynx, type='p', main='Type p') # grafico com pontos
+plot(lynx, type='l', main='Type l') # grafico com linhas (padrao)
+plot(lynx, type='b', main='Type b') # grafico com linhas e alguns pontos
+plot(lynx, type='o', main='Type o') # grafico com linhas continuas e alguns pontos
+plot(lynx, type='h', main='Type h') # grafico com linhas na vertical
+plot(lynx, type='s', main='Type s') # grafico com linhas com degraus
+plot(lynx, type='n', main='Type n') # limpando completamente o grafico
+
+
+
+# Outros exemplos de graficos
+
+# Dois plots juntos
+
+# definindo area de plotagem (define as margens (em unidades de linhas de texto) do gráfico para 4 linhas na parte inferior, 3 linhas à esquerda, 3 linhas na parte superior e 3 linhas à direita. Também define a cor dos rótulos dos eixos como preto.)
+
+par(mar = c(4,3,3,3), col.axis = 'black')
+
+
+plot(cars$speed, type='s',
+     col='red', bty='n',
+     xlab='Cars ID', ylab='')
+text(8, 14, 'Velocidade', cex=0.85, col='red')
+
+par(new=T)                                      # A função par(new = TRUE) é usada em conjunto com a função plot() para sobrepor um gráfico existente com um novo gráfico. Quando par(new = TRUE) é definido, o novo gráfico é sobreposto no gráfico anterior em vez de substituí-lo. 
+
+plot(cars$dist, type = 's',
+     col='darkblue', bty='n',
+     ann=F, axes=F)
+axis(side=4)                                    # Resumindo, ann=F e axes=F são usados para personalizar o gráfico removendo as anotações padrão e os eixos e adicionando eixos personalizados usando a função axis().
+text(37, 18, 'Distancia', cex=0.85, col='darkblue')
+
+title(main='Velocidade x Distancia')
