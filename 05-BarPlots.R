@@ -57,26 +57,15 @@ barplot(dados, col = c('steelblue1', 'tan3', 'seagreen3'),
         beside = T, legend.text = rownames(dados),
         xlab = 'xlab', ylab = 'ylab')
 
+# Com a Transposta da Matriz, invertemos as posicoes entre faixa etaria e faixa de quantidade
+# funcao t() de transposta (convertemos linha em coluna e coluna em linha)
+t(dados)
+
+barplot(t(dados), beside = T, col = c('steelblue1', 'tan3', 'seagreen3', 'peachpuff1'))
+legend('topright', legend = rownames(t(dados)), fill = c('steelblue1', 'tan3', 'seagreen3', 'peachpuff1'))
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# *** Outros exemplos ***
 
 # Grafico de barra que mostra o comprimento medio das petalas (em centimetros) por especie
 # para as flores no conjunto de dados "iris". O grafico usa as cores definidas no vetor "cores" e inclui
@@ -96,7 +85,6 @@ barplot(tapply(iris$Petal.Length, iris$Species, mean),
 
 # Adicionar uma legenda
 legend(0.15, 5, legend = levels(iris$Species), fill = cores)
-
 
 
 # Exemplo 2
