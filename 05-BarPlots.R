@@ -121,7 +121,7 @@ legend('topright', legend = c('Homem', 'Mulher'), fill = cores_altura, cex = 0.7
 text(x = 0.7, y = .9, labels = media_homem, col = 'white', cex = 2)
 text(x = 1.9, y = .8, labels = media_mulher, col = 'white', cex = 2)
 
-png('GraficoBarPlotAlturaMedia.png', width = 1500, height = 1000, res = 100)
+png('GraficoBarPlotCasamentoIgrejaTransposta.png', width = 1500, height = 1000, res = 100)
 
 dev.off() # fecha o dispositivo de graficos
   
