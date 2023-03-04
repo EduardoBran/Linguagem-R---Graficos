@@ -70,10 +70,6 @@ ggplot(data = tips, aes(x = total_bill, y = tip, color = sex)) + # color diz qua
   geom_point(size = 3)
 
 
-?aes
-??aes
-
-
 # *** Construindo um modelo de regressao (modelo de regressao linear simples) ***
 
 # - Primeiro criamos um modelo regressao linear simples (modelo_base) utilizando a formula tip ~ total_bill que vai indicar
@@ -97,7 +93,6 @@ modelo_fit <- data.frame(
 )
 View(modelo_fit)
 
-
 # Camada 2
 # - esta criando um objeto de linha (geom_line) baseada nos dados do modelo_fit
 # - mapeia o eixo x (total_bill) e o eixo y (fit) para a linha que será criada com a cor 'darkred'
@@ -109,11 +104,38 @@ camada2 <- geom_line(
 )
 ggplot() + camada1 + camada2
 
+# Camada 3
+# - utilizamos a funcao geom_ribbon() para plotar uma faixa de confianca em torno da linha de regressão ajustada.
+# - essa faixa é uma especie de limite de confiança. Logo a faixa cinza pode ser considerado uma margem de erro.
+# - A faixa de confianca é criada a partir dos intervalos de confianca calculados anteriormente e é mostrada como uma
+#   região sombreada no gráfico. A estética ymin e ymax mapeiam os limites inferior e superior do intervalo de confiança,
+#   respectivamente. O parâmetro alpha define a transparência da faixa de confiança.
+
+camada3 <- geom_ribbon(
+  mapping = aes(x = total_bill, ymin = lwr, ymax = upr),
+  data = modelo_fit,
+  alpha = 0.3
+)
+ggplot() + camada1 + camada2 + camada3
 
 
+# Versao final otimizada (sem ser por camada)
+ggplot(tips, aes(x = total_bill, y = tip)) +
+  geom_point(aes(color = sex)) +
+  geom_smooth(method = 'lm')
 
 
-# Exemplo acima usando o df_valor_casas
+# Gravando o grafico em um objeto
+
+myplot_tips <- ggplot(tips, aes(x = total_bill, y = tip)) +
+  geom_point(aes(color = sex)) +
+  geom_smooth(method = 'lm')
+
+class(myplot_tips)
+print(myplot_tips)
+
+
+# Exemplo acima usando o df_valor_casas (sem modelo de regressao linear)
 
 # Camada 1
 camada1_df <- geom_point(
@@ -123,32 +145,30 @@ camada1_df <- geom_point(
 )
 ggplot() + camada1_df
 
-# resumido
-ggplot(data = df_valor_casas, aes(x = df_valor_casas$Preco, y = df_valor_casas$N.de.Quartos, color = df_valor_casas$Bairro)) +
-  geom_point(size = 3)
+# Versao final otimizada (sem criar a camada1)
+ggplot(df_valor_casas, aes(x = df_valor_casas$Preco, y = df_valor_casas$N.de.Quartos)) +
+  geom_point(aes(color = df_valor_casas$Bairro))
 
 
-# Construindo modelo de regressao linear simples (prevendo valor de acordo com numero de quartos)
 
-modelo_base2 <- lm(df_valor_casas$Preco ~ df_valor_casas$N.de.Quartos, data = df_valor_casas)
-summary(modelo_base2)
+# Criar um ScatterPlot com linha de regressao
 
-modelo_fit2 <- data.frame(
-  `N de Quartos` = df_valor_casas$N.de.Quartos,
-  predict(modelo_base2, interval = "confidence")
-)
-View(modelo_fit2)
+# Criando os dados 
+# - data frame chamado "data" com três colunas: "cond", "var1" e "var2".
+# - coluna "cond" tem 20 observações, sendo 10 delas com o valor "Obs1" e 10 com o valor "Obs2". Essa coluna é criada com a função "rep", que repete os valores especificados um número determinado de vezes.
+# - coluna "var1" tem 100 observações e é criada com a sequência de números de 1 a 100 somada a um ruído normal gerado com a função "rnorm" com desvio padrão igual a 9.
 
-modelo_fit2$log_fit <- log(modelo_fit2$fit) # necessario para a linha da regressao aparecer junto com os dados
+data <- data.frame(cond = rep(c("Obs1", "Obs2"), each = 10),
+                   var1 = 1:100 + rnorm(100, sd = 9),
+                   var2 = 1:100 + rnorm(100, sd = 16))
+View(data)
 
-# Camada 2
+# Plot
 
-camada2_df <- geom_line(
-  mapping = aes(x = df_valor_casas$Preco, y = log_fit),
-  data = modelo_fit2,
-  color = "darkred"
-)
-ggplot() + camada1_df + camada2_df
+
+
+
+
 
 
 
