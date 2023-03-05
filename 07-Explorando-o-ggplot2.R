@@ -122,7 +122,7 @@ ggplot() + camada1 + camada2 + camada3
 # Versao final otimizada (sem ser por camada)
 ggplot(tips, aes(x = total_bill, y = tip)) +
   geom_point(aes(color = sex)) +
-  geom_smooth(method = 'lm')
+  geom_smooth(method = lm, color = 'darkred')
 
 
 # Gravando o grafico em um objeto
@@ -165,6 +165,21 @@ View(data)
 
 # Plot
 
+# - O codigo abaixo cria um gráfico de dispersão (scatterplot) com os valores da variável "var1" no eixo x e os valores
+#   da variável "var2" no eixo y, utilizando o pacote ggplot2.
+# - A funcao geom_point() adiciona os pontos ao gráfico com o argumento "shape" especificando a forma dos pontos e "size"
+#   especificando o tamanho.
+# - A funcao geom_smooth() adiciona uma linha de tendência ao grafico utilizando o método de regressão linear (lm).
+#   O argumento "se = FALSE" remove a sombra ao redor da linha de tendência.
+
+ggplot(data, aes(x = var1, y = var2)) +
+  geom_point(shape = 1, size = 2 ) +
+  geom_smooth(method = lm, color = 'red', se = FALSE)
+
+?lm
+
+
+# BarPlot
 
 
 
@@ -172,22 +187,6 @@ View(data)
 
 
 
-# *** Explicando a saida de ' summary (modelo_base) ' ***
-
-# Call:
-#   lm(formula = tip ~ total_bill, data = tips)
-# 
-# Residuals:
-#   Min      1Q  Median      3Q     Max 
-# -3.1982 -0.5652 -0.0974  0.4863  3.7434 
-# 
-# Coefficients:
-#   Estimate Std. Error t value Pr(>|t|)    
-# (Intercept) 0.920270   0.159735   5.761 2.53e-08 ***
-#   total_bill  0.105025   0.007365  14.260  < 2e-16 ***
-#   ---
-#   Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-# 
 # Residual standard error: 1.022 on 242 degrees of freedom
 # Multiple R-squared:  0.4566,	Adjusted R-squared:  0.4544 
 # F-statistic: 203.4 on 1 and 242 DF,  p-value: < 2.2e-16
