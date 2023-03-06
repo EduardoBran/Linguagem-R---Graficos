@@ -167,8 +167,8 @@ View(data)
 
 # - O codigo abaixo cria um gráfico de dispersão (scatterplot) com os valores da variável "var1" no eixo x e os valores
 #   da variável "var2" no eixo y, utilizando o pacote ggplot2.
-# - A funcao geom_point() adiciona os pontos ao gráfico com o argumento "shape" especificando a forma dos pontos e "size"
-#   especificando o tamanho.
+# - A funcao geom_point() adiciona os pontos ao gráfico com o argumento "shape" especificando a forma dos pontos e 
+#   "size" especificando o tamanho.
 # - A funcao geom_smooth() adiciona uma linha de tendência ao grafico utilizando o método de regressão linear (lm).
 #   O argumento "se = FALSE" remove a sombra ao redor da linha de tendência.
 
@@ -181,11 +181,81 @@ ggplot(data, aes(x = var1, y = var2)) +
 
 # BarPlot
 
+# Criando df para dados
+
+dados <- data.frame(grupo = c('A ', 'B ', 'C ', 'D '),
+                    valor = c(33, 62, 56, 67),
+                    num_obs = c(100, 500, 459, 342))
+
+View(dados)
+
+# Gerando a massa de dados no df
+
+dados$right = cumsum(dados$num_obs) + 30 * c(0:(nrow(dados)-1))
+dados$left = dados$right - dados$num_obs
+
+# Plot
+
+ggplot(dados) +                                 
+  geom_rect(aes(xmin = left, xmax = right,                                  # usamos geom_rect para grafico de barras / xmin e xmax valores do label x
+                ymin = 0, ymax = valor, colour = grupo, fill = grupo)) +    # ymin e ymax valors do label / colour define a borda e fill preenche as cores e cria legenda
+                xlab('Numero de Observacoes') + ylab('Valor')
+
+
+
+
+# Usando mtcars
+
+View(df_mtcars)
+
+# Plot - podemos visualizar como a quilometragem média do combustível varia com a cilindrada do motor. Em geral, espera-se que
+# a eficiência do combustível diminua à medida que a cilindrada do motor aumenta,
+
+ggplot(data = mtcars, aes(x = disp, y = mpg)) + geom_point() # com milhas por galao
+
+# Outro aspecto que pode ser mapeado nesse grafico é a cor dos pontos 
+# A opção colour é utilizada para representar as cores dos pontos no gráfico de acordo com a variável am, que indica se
+# o carro possui transmissão automática (am = 0) ou manual (am = 1). Como essa variável é categórica, a função as.factor() é utilizada para convertê-la em um fator.
+
+ggplot(data = mtcars, aes(x = disp, y = mpg, colour = as.factor(am))) +
+  geom_point()
+
+# No entando, tambem podemos mapear uma variavel continua a cor dos pontos: (coluna cyl)
+
+ggplot(data = mtcars, aes(x = disp, y = mpg, colour = cyl)) +
+  geom_point()
+
+# Tambem podemos mapear o tamanho dos pontos a uma variavel de interesse (coluna wt)
+# A legenda é inserida automaticaente no grafico
+
+ggplot(data = mtcars, aes(x = disp, y = mpg, colour = cyl, size = wt)) +
+  geom_point()
+
+
+# *** Os geoms() definem qual forma geometrica sera utilizada para visualizacao dos dados no grafico ***
+
+
+# Boxplot
+ggplot(data = mtcars,
+       aes(x = as.factor(cyl), y = mpg)) +
+  geom_boxplot()
+
+# Histogramas
+ggplot(data = mtcars, 
+       aes(x = mpg), binwidth = 30) +
+  geom_histogram()
+
+# Grafico de Barras
+ggplot(data = mtcars,
+       aes(x = as.factor(cyl))) +
+  geom_bar()
 
 
 
 
 
+
+# *** explicando 'summary(modelo_base)' ***
 
 # Residual standard error: 1.022 on 242 degrees of freedom
 # Multiple R-squared:  0.4566,	Adjusted R-squared:  0.4544 
