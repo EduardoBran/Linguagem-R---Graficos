@@ -151,7 +151,7 @@ ggplot(df_valor_casas, aes(x = df_valor_casas$Preco, y = df_valor_casas$N.de.Qua
 
 
 
-# Criar um ScatterPlot com linha de regressao
+# Criar um ScatterPlot (grafico de dispersao) com linha de regressao
 
 # Criando os dados 
 # - data frame chamado "data" com três colunas: "cond", "var1" e "var2".
@@ -204,7 +204,7 @@ ggplot(dados) +
 
 
 
-# Usando mtcars
+# Usando o df mtcars
 
 View(df_mtcars)
 
@@ -250,6 +250,92 @@ ggplot(data = mtcars,
        aes(x = as.factor(cyl))) +
   geom_bar()
 
+
+
+
+# Personalizando os graficos (mudando cores e contorno)
+
+colors()
+
+ggplot(data = mtcars, aes(x = as.factor(cyl), y = mpg, colour = as.factor(cyl))) + # utiliza a função as.factor() para mapear a variável cyl para as estéticas colour e fill como fatores, o que faz com que diferentes cores sejam usadas para as diferentes categorias da variável. Já o segundo código, por não usar a função as.factor(), mapeia a variável cyl para a estética fill como uma variável numérica contínua, o que não resulta em cores diferentes para cada categoria.
+  geom_boxplot()
+
+ggplot(data = mtcars, aes(x = as.factor(cyl), y = mpg, fill = as.factor(cyl))) +
+  geom_boxplot()
+
+ggplot(data = mtcars, aes(x = as.factor(cyl), y = mpg)) +
+  geom_boxplot(color = 'blue', fill = 'seagreen4')
+
+
+
+# Podemos alterar os eixos
+
+ggplot(data = mtcars, aes(x = mpg)) +
+  geom_histogram() +
+  xlab('Milhas por galao') + ylab('Frequencia')
+
+
+# Legendas
+ggplot(data = mtcars, aes(x = as.factor(cyl), fill = as.factor(cyl))) +
+  geom_bar() +
+  labs(fill = 'Cyl') # legenda da legenda
+
+# Trocando a posicao da legenda
+ggplot(data = mtcars, aes(x = as.factor(cyl), fill = as.factor(cyl))) +
+  geom_bar() +
+  labs(fill = 'Cyl') +
+  theme(legend.position = 'top') # posicao da legenda
+
+# Sem legenda
+ggplot(data = mtcars, aes(x = as.factor(cyl), fill = as.factor(cyl))) +
+  geom_bar() +
+  guides(fill = FALSE)
+
+
+
+# Facets (varios graficos na mesma area de plotagem)
+
+# - A função facet_grid() é usada para dividir o gráfico em painéis diferentes com base no valor da variável am, que representa
+# o tipo de transmissão (0 para automática e 1 para manual). O argumento ~. indica que o gráfico deve ser dividido apenas em
+# uma coluna com painéis diferentes para cada valor distinto de am.
+
+# - Dessa forma, o gráfico resultante mostra um painel para carros com transmissão automática (am = 0) e outro para carros com
+# transmissão manual (am = 1), em que cada painel apresenta o gráfico de dispersão dos pontos coloridos por número de cilindros.
+
+ggplot(data = mtcars, aes(x = mpg, y = disp, colour = as.factor(cyl))) +
+  geom_point() +
+  facet_grid(am~.)                                                         # horizontal
+
+ggplot(data = mtcars, aes(x = mpg, y = disp, colour = as.factor(cyl))) +
+  geom_point() +
+  facet_grid(.~gear)                                                       # vertical
+
+
+
+# *** Plots diferentes juntos (diferente de Facet) ***
+
+install.packages('gridExtra')
+library(gridExtra)
+library(ggplot2)
+
+# Dataset diamonds
+data(diamonds)
+
+
+# Histograma com plot1 - Podemos observar a partir do gráfico que a maior concentração de preços de diamantes está na faixa de 0 a 10000, sendo que a maioria dos diamantes têm preço inferior a 5000. Além disso, podemos notar que há uma cauda longa na distribuição, indicando que existem poucos diamantes com preços muito altos.
+
+plot1 <- qplot(price, data = diamonds, binwidth = 1000, xlab = 'Preco', ylab = 'Frequencia')
+plot1
+
+# ScatterPlot (grafico de dispersao) com plot2 - relação entre o peso e o preço do diamante, observando como eles variam em conjunto. É possível notar que há uma tendência de aumento do preço à medida que o peso do diamante aumenta, o que é esperado. Porém, também é possível notar que os diamantes com corte "Ideal" têm preços mais altos em geral, independentemente do seu peso, enquanto os diamantes com corte "Fair" têm preços mais baixos em geral.
+
+plot2 <- qplot(carat, price, data = diamonds, colour = cut, xlab = 'Carat (Peso em quilates)', ylab = 'Preco') +
+  labs(color = 'Cut (Qualidade de Corte)')
+plot2
+
+# Combinando os 2 plots na mesma area
+
+grid.arrange(plot1, plot2, ncol = 1)
 
 
 
@@ -305,7 +391,12 @@ ggplot(data = mtcars,
 #   Isso confirma a conclusão da seção "F-statistic".
 
 
-png('GraficoDisperComModeloDeRegressao.png', width = 1500, height = 1000, res = 100)
+png('GraficoGrindDiamonds.png', width = 1500, height = 1000, res = 100)
 
 dev.off() # fecha o dispositivo de graficos
 
+
+# salvar a grade de plots em um arquivo PNG
+ggsave("GraficoGrindDiamonds.png", width = 8, height = 6, dpi = 300)
+
+dev.off() # fecha o dispositivo de graficos
