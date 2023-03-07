@@ -312,7 +312,7 @@ ggplot(data = mtcars, aes(x = mpg, y = disp, colour = as.factor(cyl))) +
 
 
 
-# *** Plots diferentes juntos (diferente de Facet) ***
+# Plots diferentes juntos (diferente de Facet)
 
 install.packages('gridExtra')
 library(gridExtra)
@@ -320,7 +320,6 @@ library(ggplot2)
 
 # Dataset diamonds
 data(diamonds)
-
 
 # Histograma com plot1 - Podemos observar a partir do gráfico que a maior concentração de preços de diamantes está na faixa de 0 a 10000, sendo que a maioria dos diamantes têm preço inferior a 5000. Além disso, podemos notar que há uma cauda longa na distribuição, indicando que existem poucos diamantes com preços muito altos.
 
@@ -337,6 +336,47 @@ plot2
 
 grid.arrange(plot1, plot2, ncol = 1)
 
+
+# Graficos de Densidade
+
+ggplot(data = diamonds,
+       aes(x = price, group = cut, fill = cut)) +
+  geom_density(adjust = 1.5)
+
+ggplot(data = diamonds,
+       aes(x = price, group = cut, fill = cut)) +
+  geom_density(adjust = 1.5, alpha = 0.2)
+
+ggplot(data = diamonds,
+       aes(x = price, group = cut, fill = cut)) +
+  geom_density(adjust = 1.5, position = 'fill')
+
+
+
+# Facets com reshape (fazendo ajuste no shape (formato) dos facets)
+
+install.packages('reshape2')
+install.packages(('plotly')) # ele permite que voce crie o grafico no R e publique direto no servico do plotly na internet
+library(reshape2)
+library(plotly)
+
+sp <- ggplot(data = tips,
+             aes(x = total_bill, y = tip/total_bill)) + geom_point(shape = 1)
+
+sp
+sp + facet_grid(sex ~ .)
+
+sp + facet_grid(. ~ sex)
+
+sp + facet_wrap( ~ day, ncol = 2) # com facet_wrap pode colocar o argumento ncol
+
+ggplotly()
+
+
+ggplot(data = mpg,
+       aes(x = displ, y = hwy)) + geom_point() + facet_wrap( ~ manufacturer) +
+  xlab('displ (Cilindrada)') + ylab('hwy (Consumo de Combustivel na estrada)')
+ggplotly()
 
 
 
