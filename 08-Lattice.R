@@ -76,3 +76,38 @@ barchart(data = tips, time ~ tip | sex + smoker,
          scales = list(x = 'free'))
 
 
+
+# Contagem de elementos (dataset iris)
+
+PetalGrupo <- equal.count(iris$Petal.Length, 4) # equal.count divide a coluna em 6 grupos por padrao (aqui 4)
+PetalGrupo
+
+# Scatterplots (grafico de dispersao)
+# O grafico é dividido em 4 paineis, um para cada grupo gerado pela função "equal.count()". Em cada painel, são exibidos os pontos que
+# correspondem às observações do conjunto de dados "iris" que pertencem ao grupo correspondente. Isso permite visualizar a relação entre
+# as variáveis "Sepal.Length" e "Sepal.Width" dentro de cada grupo de tamanho igual de "Petal.Length". 
+# A legenda acima de cada painel indica o intervalo de valores de "Petal.Length" correspondente ao grupo.
+
+xyplot(data = iris, Sepal.Length ~ Sepal.Width | PetalGrupo)
+
+# com grid
+xyplot(data = iris, Sepal.Length ~ Sepal.Width | PetalGrupo,
+       panel = function(...) {
+         panel.grid(h = -1, v = -1, col.line = 'skyblue')
+         panel.xyplot(...)
+       })
+
+# com modelo de regressao
+xyplot(data = iris, Sepal.Length ~ Sepal.Width | PetalGrupo,
+       panel = function(x,y,...) {
+         panel.xyplot(x,y,...)
+         mylm <- lm(y ~ x)
+         panel.abline(mylm)
+       })
+
+
+# 
+
+
+tipsLength <- equal.count(tips$tip, 50)
+tipsLength
