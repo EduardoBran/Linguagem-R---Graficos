@@ -44,16 +44,35 @@ View(Titanic)         # Por exemplo, na primeira linha não há passageiros do s
 
 
 # - Grafico de barras empilhadas (stacked bar chart) usando os dados do Titanic.
-# - O argumento data indica que os dados utilizados são aqueles do objeto Titanic, que é um conjunto de dados disponível no pacote datasets do R.
+# - O argumento data indica que os dados utilizados são aqueles do objeto Titanic, que é um conjunto de dados disponível no pacote datasets do R. (Foi usado o as.data.frame para transformar o Titanic (que é da class table) em dataframe)
 # - O argumento Class ~ Freq indica que a variável de classe (Class) é representada no eixo x e a variável de frequência (Freq) é representada no eixo y.
 # - O operador | separa as variáveis do eixo x de acordo com os valores de outras variáveis. Neste caso, as variáveis Sex e Age são
 #   usadas para separar as barras no eixo x.
 # - O argumento groups indica que as barras empilhadas são separadas de acordo com os valores da variável Survived, que representa se
 #   o passageiro sobreviveu ou não ao naufrágio.
 # - O argumento stack indica que as barras devem ser empilhadas uma em cima da outra.
-# - O argumento layout indica que as barras devem ser organizadas em um layout com 4 linhas e 1 coluna.
-# - O argumento auto.key indica que o gráfico deve incluir uma legenda automática, com o título "Dados Titanic" e duas colunas.
+# - O argumento layout indica que as barras devem ser organizadas em um layout com 4 linhas em 1 coluna.
+# - O argumento auto.key indica que o gráfico deve incluir uma legenda automática, com o título "Dados Titanic" em duas colunas.
+# - O argumento sclaes ajusta a escala para cada coluna
 
 barchart(data = as.data.frame(Titanic), Class ~ Freq | Sex + Age, 
          groups = Survived, stack = T, layout = c(4, 1),
-         auto.key = list(title = 'Dados Titanic', columns =2))
+         auto.key = list(title = 'Dados Titanic (Sobreviveu)', columns =2))
+
+barchart(data = as.data.frame(Titanic), Class ~ Freq | Sex + Age, 
+         groups = Survived, stack = T, layout = c(4, 1),
+         auto.key = list(title = 'Dados Titanic (Sobreviveu)', columns =2),
+         scales = list(x = 'free'))
+
+
+# exemplo com tips
+barchart(data = tips, time ~ tip | sex,
+         groups = time, stack = F,
+         auto.key = list(title = 'Dados Restaurante', columns = 2))
+
+barchart(data = tips, time ~ tip | sex + smoker,
+         groups = time, stack = F, layout = c(4, 1),
+         auto.key = list(title = 'Dados Restaurante', columns = 2),
+         scales = list(x = 'free'))
+
+
