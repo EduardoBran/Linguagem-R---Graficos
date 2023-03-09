@@ -57,13 +57,21 @@ View(Titanic)         # Por exemplo, na primeira linha não há passageiros do s
 
 barchart(data = as.data.frame(Titanic), Class ~ Freq | Sex + Age, 
          groups = Survived, stack = T, layout = c(4, 1),
-         auto.key = list(title = 'Dados Titanic (Sobreviveu)', columns =2))
+         auto.key = list(title = 'Titanic (Survived)', columns = 2))
 
 barchart(data = as.data.frame(Titanic), Class ~ Freq | Sex + Age, 
          groups = Survived, stack = T, layout = c(4, 1),
-         auto.key = list(title = 'Dados Titanic (Sobreviveu)', columns =2),
+         auto.key = list(title = 'Titanic (Survived)', columns = 2),
          scales = list(x = 'free'))
 
+# com ggplot2
+ggplot(data = as.data.frame(Titanic)) +
+  geom_bar(aes(x = Class, y = Freq, fill = Survived),
+           stat = 'identity', position = 'stack') +
+  facet_grid(Sex ~ Age, scales = 'free', switch = 'y') +
+  labs(title = 'Titanic (Survived)', x = 'Class', y = 'Freq') +
+  theme_bw()
+    
 
 # exemplo com tips
 barchart(data = tips, time ~ tip | sex,
@@ -106,7 +114,34 @@ xyplot(data = iris, Sepal.Length ~ Sepal.Width | PetalGrupo,
        })
 
 
-# 
+# Histograma
+
+# - histograma criado usando df "iris", e contem medidas de comprimento e largura de petalas e sepalas de 3 especies de íris.
+# - O parametro "~Sepal.Length | Species" especifica que o histograma deve ser criado para a variável Sepal.Length, dividida por espécies. Ou seja, serão criados três histogramas, um para cada espécie de íris.
+# - O parametro "xlab = ''" é utilizado para remover o rótulo do eixo x do gráfico. O parâmetro "type = 'density'"
+#   é utilizado para exibir as densidades em vez das frequências no eixo y.
+# - O parametro "layout=c(3,1)" define o layout do gráfico, que terá três painéis na vertical e um na horizontal.
+# - O parametro "main = 'Histograma Lattice'" é utilizado para definir o título principal do gráfico. O parâmetro "sub = 'Iris Dataset, Sepal Length'" é utilizado para definir um subtítulo.
+
+histogram(data = iris, ~Sepal.Length | Species,
+          xlab = "", type = "density", layout=c(3,1),
+          main = "Histograma Lattice", sub = "Iris Dataset, Sepal Length")
+
+
+# Distribuicao dos Dados
+qqmath(data = iris, ~ Sepal.Length | Species, distribution = qunif)
+
+
+# Boxplot
+bwplot(data = iris, Species~Sepal.Length)
+
+
+# ViolinPlot
+bwplot(data = iris, Species~Sepal.Length, panel = panel.violin)
+
+
+View(iris)
+
 
 
 tipsLength <- equal.count(tips$tip, 50)
