@@ -24,21 +24,21 @@ dim(mapa)
 View(mapa)
 
 
-# Gerando o Mapa
+# Gerando o Mapa (apenas com preenchimento)
 
 ggplot() + 
   geom_polygon(data = mapa,
                aes(x = long, y = lat, group = group)) +
   coord_fixed(1.3)
 
-# tirando preenchimento e colocando contorno
+# tirando preenchimento e colocando apenas contorno
 ggplot() + 
   geom_polygon(data = mapa,
                aes(x = long, y = lat, group = group),
                fill = NA, color = 'black') +
   coord_fixed(1.3)
 
-# tirando preenchimento com contorno
+# preenchimento com contorno
 gg1 <- 
   ggplot() + 
   geom_polygon(data = mapa,
@@ -49,5 +49,17 @@ gg1
 
 
 
+# Escolhendo a localização para 2 pontos no mapa
+labs <- data.frame(
+  long = c(69.24140, -2.8456051),
+  lat = c(-78.38995, 22.44512),
+  names = c('Ponto1', 'Ponto2'),
+  stringsAsFactors = FALSE
+)
+
+# Marcando os 2 pontos no mapa (temos dois para criar com contorno preto e a bolinha amarelo)
+gg1 +
+  geom_point(data = labs, aes(x = long, y = lat), color = 'black', size = 2) +
+  geom_point(data = labs, aes(x = long, y = lat), color = 'yellow', size = 2)
 
 
