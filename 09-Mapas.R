@@ -63,3 +63,9 @@ gg1 +
   geom_point(data = labs, aes(x = long, y = lat), color = 'yellow', size = 2)
 
 
+# Divisao por paises
+
+ggplot(data = mapa) +
+  geom_polygon(aes(x = long, y = lat, fill = region, group = group), color = 'white') +
+  coord_fixed(1.3) +
+  guides(fill = FALSE)
