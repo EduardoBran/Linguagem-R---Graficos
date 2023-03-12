@@ -1,0 +1,89 @@
+**********    O que sao Graficos ?    **********
+
+O grafico é uma representacao com forma geometrica (o que significa que ele precisa ser desenhado em uma tela do computador) construida de maneira exata e precisa a partir de informacoes numericas (para que o grafico transmita a informacao precisa construi-lo de maneira precisa atraves dos dados) obtidas atraves de pesquisas e organizadas em uma tabela (pesquisa neste caso é buscar os dados na fonte ou atraves de pesquisa).
+
+
+
+**********    Como a Linguagem R trata as visualizacoes de Dados ?    **********
+
+Existe um consenso na comunidade de Data Science, que a linguagem R fornece algumas das melhores ferramentas para geracao de graficos
+
+Os graficos podem ser replicados, modificados e publicados com apenas poucas linhas de codigo.
+
+O pacote ggplot2 é considerado um dos melhores pacotes para visualizacao de dados do mercado. (existe a versao para linguagem R e tambem para Python).
+
+Os plots (graficos bem simples) sao objetos construidos através de funcões com atributos (tamanho, cor).
+
+Podemos criar graficos bem mais completos e profissionais usando pacotes como ggplot2, lattice.
+
+
+
+**********    Tipos de Graficos    **********
+
+
+                  - Colunas
+                  - Barras 
+                  - Linha
+                  - Dispersao
+Graficos em R     - area
+                  - Bolhas
+                  - Superficie
+                  - Cone
+                  - Pizza
+
+
+Devemos nos preocupar com tipos/cores de pontos/linhas pois isso impacta como vao ver nosso grafico.
+
+
+
+**********    Gramatica dos Graficos    **********
+
+Descricao para cada um dos 7 elementos da Gramatica dos Graficos
+
+
+Elemento         -         Descricao
+
+
+Dados            -         Conjunto de dados a ser analisado
+
+Estetica         -	   Escala em que mapeamos os dados (escala influencia interpretacao dos                                dados)
+
+Geometria        -         Elementos visuais usados para representar os dados (tipo de linha em 			           grafico de linha, tipo de ponto em grafico de dispersao)
+
+Facets           -         Visualizacao do grafico em porcoes menores 
+
+Estatistica      -         Representacao e analise dos dados (leitura dos dados)
+
+Coordenadas      -         area na qual o grafico sera construido
+
+Temas            -         Visual geral do grafico
+
+
+
+Aqui estão alguns dos principais tipos de gráficos usados e suas explicações:
+
+1- Gráfico de dispersão (Scatter plot): 
+
+	É um gráfico que representa a relação entre duas variáveis numéricas. O eixo x é usado para representar uma variável, enquanto o eixo y é usado para representar a outra variável. Cada ponto no gráfico representa uma observação e sua posição no gráfico mostra a relação entre as duas variáveis.
+
+Exemplo de uso: Um cientista de dados pode usar um gráfico de dispersão para examinar a relação entre a idade e o salário dos funcionários em uma empresa. O eixo x pode representar a idade dos funcionários, enquanto o eixo y pode representar o salário. Cada ponto no gráfico representa um funcionário e sua posição no gráfico mostra a relação entre a idade e o salário.
+
+
+2- Gráfico de barras (Bar plot): 
+
+	É um gráfico que representa a distribuição de uma variável categórica. O eixo x é usado para representar as categorias e o eixo y é usado para representar a contagem ou proporção de cada categoria.
+
+Exemplo de uso: Um cientista de dados pode usar um gráfico de barras para examinar a distribuição de gênero entre os funcionários em uma empresa. O eixo x pode representar as categorias de gênero (masculino e feminino), enquanto o eixo y pode representar a contagem de funcionários em cada categoria.
+
+
+3- Gráfico de linhas (Line plot): 
+
+	É um gráfico que representa a relação entre duas variáveis numéricas ao longo do tempo. O eixo x é usado para representar o tempo e o eixo y é usado para representar a outra variável. Uma linha é desenhada conectando cada ponto no gráfico.
+
+Exemplo de uso: Um cientista de dados pode usar um gráfico de linhas para examinar a tendência de vendas ao longo do tempo. O eixo x pode representar os meses do ano, enquanto o eixo y pode representar o valor das vendas. Uma linha é desenhada conectando o valor das vendas de cada mês.
+
+
+4- Gráfico de caixa (Box plot): 
+	É um gráfico que representa a distribuição de uma variável numérica. O gráfico mostra a mediana, os quartis e os outliers da distribuição.
+
+Exemplo de uso: Um cientista de dados pode usar um gráfico de caixa para examinar a distribuição de salários em uma empresa. O gráfico mostrará a mediana, o primeiro quartil (25%), o terceiro quartil (75%) e os outliers da distribuição.

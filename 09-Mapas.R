@@ -7,12 +7,16 @@ getwd()
 
 # Instalando os pacotes
 install.packages(c('ggplot2', 'maps', 'mapdata'))
+install.packages(c("maptools", "geosphere"))
 
 # Carregando pacotes
 library(ggplot2)
 library(maps)
 library(mapdata)
 
+
+library(maptools)
+library(geosphere)
 
 # Funcao que busca as coordenadas dos paises
 ?map_data
@@ -69,3 +73,23 @@ ggplot(data = mapa) +
   geom_polygon(aes(x = long, y = lat, fill = region, group = group), color = 'white') +
   coord_fixed(1.3) +
   guides(fill = FALSE)
+
+
+
+
+
+
+# Carrega os dados do Brasil
+brasil_map <- map_data("world", "Brazil")
+
+View(brasil_map)
+
+# Plota o mapa do Brasil
+ggplot() +
+  geom_polygon(data = brasil_map, aes(x = long, y = lat, group = group), 
+               fill = "gray", color = "white") +
+  coord_fixed(1.3) +
+  theme_void()
+
+
+
