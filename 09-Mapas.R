@@ -76,6 +76,51 @@ ggplot(data = mapa) +
 
 
 
+# rMaps
+# http://rmaps.github.io
+
+
+require(devtools)
+install_github('ramnathv/rCharts@dev')
+install_github('ramnathv/rMaps')
+install.packages("rjson")
+install.packages("htmlwidgets")
+install.packages("IRdisplay")
+
+library(rMaps)
+library(htmlwidgets)
+library(IRdisplay)
+
+# Example 1: CrossLet 
+
+# - CrossLet é uma biblioteca de mapeamento incrível que combina Leaflet e CrossFilter, permitindo a criação de visualizações
+# impressionantes. rMaps envolve o CrossLet e fornece aos usuários do R uma interface simples para acessar seus recursos.
+
+
+crosslet(
+  x = "country", 
+  y = c("web_index", "universal_access", "impact_empowerment", "freedom_openness"),
+  data = web_index
+)
+
+
+# Example 2: DataMaps
+
+ichoropleth(Crime ~ State, data = subset(violent_crime, Year == 2010))
+ichoropleth(Crime ~ State, data = violent_crime, animate = "Year")
+ichoropleth(Crime ~ State, data = violent_crime, animate = "Year", play = TRUE)
+
+
+# Example 3: Leaflet
+
+map <- Leaflet$new()
+map$setView(c(51.505, -0.09), zoom = 13)
+map$tileLayer(provider = 'Stamen.Watercolor')
+map$marker(
+  c(51.5, -0.09),
+  bindPopup = 'Hi. I am a popup'
+)
+map
 
 
 
